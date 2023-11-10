@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="/socket.io/socket.io.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simple Chat </title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+  }
+  #chat-container {
+    width: 90%;
+    max-width: 800px;
+    margin: 30px auto;
+    box-shadow: 0 0 10px #ccc;
+    overflow: hidden;
+  }
+  #message-container {
+    height: 300px;
+    overflow-y: auto;
+    padding: 20px;
+    background: #f9f9f9;
+  }
+  #message-container div {
+    margin-bottom: 10px;
+    padding: 8px;
+    background: #e1e1e1;
+    border-radius: 5px;
+  }
+  #input-container {
+    padding: 20px;
+    background: #fff;
+  }
+  #input-container input {
+    width: calc(100% - 90px);
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  #input-container button {
+    padding: 10px 20px;
+    background: #5cb85c;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+  }
+  #input-container button:hover {
+    background: #4cae4c;
+  }
+</style>
+</head>
+<body>
+
+<div id="chat-container">
+  <div id="message-container">
+    <!-- Messages will appear here -->
+  </div>
+  <div id="input-container">
+    <input type="text" id="message-input" placeholder="Type a message...">
+    <button onclick="sendMessage()">Send</button>
+  </div>
+</div>
+
+<script>
+  const socket = io();
+
+  // Receive chat messages from the server and display them
+  socket.on('chat message', function(msg) {
+    appendMessage(msg);
+  });
+
+  // Receive chat history from the server and display it
+  socket.on('chat history', function(history) {
+    const messages = history.split('\n');
+    messages.forEach(function(msg) {
+      if (msg.trim().length > 0) {
+        appendMessage(msg);
+      }
+    });
+  });
+
+  // Function to append a message to the chat container
+  function appendMessage(message) {
+    var messageDiv = document.createElement('div');
+    messageDiv.textContent = message;
+    document.getElementById('message-container').appendChild(messageDiv);
+    // Scroll to the bottom of the message container
+    document.getElementById('message-container').scrollTop = document.getElementById('message-container').scrollHeight;
+  }
+
+  // Send a message when the "Enter" key is pressed
+  document.getElementById('message-input').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+      sendMessage();
+    }
+  });
+
+  // Function to send a message to the server
+  function sendMessage() {
+    var input = document.getElementById('message-input');
+    var message = input.value.trim();
+    if(message !== "") {
+      socket.emit('chat message', message);
+      input.value = '';
+      input.focus();
+    }
+  }
+</script>
+
+
+</body>
+</html>
