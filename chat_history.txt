@@ -1,23 +1,14 @@
-we
-asd
-as
-If the chat messages disappear when you refresh the browser, it suggests that the client-side code isn't correctly handling the chat history sent from the server upon reconnection. Here are some steps to troubleshoot and ensure that the chat history persists across browser refreshes:
-cc
-as
+
+chat o day nao
+oke
+yeppp
+hi there
+nothing on earth
+yepp
+M là ai
+c
 cc
 a
-x
-c
-c
-cas
-c
-asdd
-c
-asds
-hi
-how are you
-cc
-dm m
-al
-alooo
-chat o day nao
+ad
+aa
+aa

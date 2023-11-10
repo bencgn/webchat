@@ -17,6 +17,9 @@ function saveMessage(message) {
 
 // Load chat history and emit to newly connected client
 io.on('connection', (socket) => {
+
+  console.log('A user connected');
+
   fs.readFile(chatHistoryFile, 'utf8', (err, data) => {
     if (err) {
       console.log('Error reading chat history:', err);
@@ -29,8 +32,23 @@ io.on('connection', (socket) => {
     io.emit('chat message', msg);
     saveMessage(msg);
   });
+
+
+  socket.on('disconnect', () => {
+    console.log('User disconnected');
+  });
+
+
+
 });
 
-server.listen(3000, () => {
+server.listen(3000, '0.0.0.0', () => {
   console.log('listening on *:3000');
 });
+
+
+
+
+
+
+
