@@ -109,7 +109,7 @@
         showNotification('User uploaded a file: ' + file.originalName);
     }
   });
-
+ 
   // Receive chat history from the server and display it
   socket.on('chat history', function(history) {
     const messages = history.split('\n');
