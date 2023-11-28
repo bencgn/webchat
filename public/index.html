@@ -58,18 +58,56 @@
   <div id="message-container">
     <!-- Messages will appear here -->
   </div>
+
   <div id="input-container">
+    <!-- Form for file upload -->
+    <form id="upload-form" enctype="multipart/form-data">
+        <input type="file" id="file-input" name="file">
+        <button type="button" onclick="uploadFile()">Update</button>
+    </form>
+
+    <!-- Existing chat input and send button -->
     <input type="text" id="message-input" placeholder="Type a message...">
     <button onclick="sendMessage()">Send</button>
-  </div>
+</div>
 </div>
 
 <script>
+  // Function to request notification permissions
+  function requestNotificationPermission() {
+    if ("Notification" in window) {
+        Notification.requestPermission().then(permission => {
+            if (permission === "granted") {
+                console.log("Notification permission granted.");
+            }
+        });
+    }
+  }
+
+  // Call the function when the page loads
+  window.onload = requestNotificationPermission;
+
   const socket = io();
 
   // Receive chat messages from the server and display them
   socket.on('chat message', function(msg) {
     appendMessage(msg);
+  });
+
+  // New listener for the 'file uploaded' event
+  socket.on('file uploaded', function(file) {
+    var item = document.createElement('li');
+    item.textContent = 'User uploaded a file: ' + file.originalName;
+    item.style.cursor = 'pointer';
+    item.onclick = function() {
+        window.open('/path-to-uploaded-files/' + file.filename);
+    };
+    document.getElementById('message-container').appendChild(item);
+
+    // Show a browser notification
+    if (document.hidden) {
+        showNotification('User uploaded a file: ' + file.originalName);
+    }
   });
 
   // Receive chat history from the server and display it
@@ -87,8 +125,24 @@
     var messageDiv = document.createElement('div');
     messageDiv.textContent = message;
     document.getElementById('message-container').appendChild(messageDiv);
+    
+    // Check if the document is hidden
+    if (document.hidden) {
+        showNotification(message);
+    }
+
     // Scroll to the bottom of the message container
     document.getElementById('message-container').scrollTop = document.getElementById('message-container').scrollHeight;
+  }
+
+  // Function to show a notification
+  function showNotification(message) {
+    if (Notification.permission === "granted") {
+        new Notification('New Message', {
+            body: message,
+            icon: '/path-to-your-icon/icon.png' // Optional icon URL
+        });
+    }
   }
 
   // Send a message when the "Enter" key is pressed
@@ -108,7 +162,27 @@
       input.focus();
     }
   }
+
+  // Function to handle file upload
+  function uploadFile() {
+    var formData = new FormData(document.getElementById('upload-form'));
+    fetch('/upload', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+        console.log(data);
+        // Hide the upload form after successful upload
+        document.getElementById('upload-form').style.display = 'none';
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        // Handle errors here
+    });
+  }
 </script>
+
 
 
 </body>

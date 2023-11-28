@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<connecter>
+  <workspace>
+    <fileVersion>1.1</fileVersion>
+    <settings>
+      <setting key="2007">["E:\\d3-racing-legends2\\Assets\\3d_source\\Ben","E:\\d3-racing-legends2\\Assets\\3d_source\\Dong","E:\\d3-racing-legends2\\Assets\\3d_source\\Dong\\chapter_02","E:\\d3-racing-legends2\\Assets\\3d_source\\Dong\\building","D:\\stable-diffusion-webui\\outputs","D:\\Project","D:\\File_HN","D:\\Project\\d3-racing-legends2_source_file","D:\\d3-racing-legends2","D:\\Unity\\Air_Beatemup\\Air_Beatemup\\Assets","E:\\d3-racing-legends2\\.vscode","E:\\d3-racing-legends2\\Assets","E:\\d3-racing-legends2\\Assets\\3d_source\\R1_resource","E:\\d3-racing-legends2\\Assets\\3d_source\\Hai","E:\\d3-racing-legends2\\Assets\\3d_source\\Thinh","E:\\d3-racing-legends2\\Assets\\3d_source\\_3dasset","E:\\d3-racing-legends2\\Assets\\3d_source","E:\\d3-racing-legends2","D:\\","E:\\RACING\\d3-racing-legends2\\Assets\\3d_source"]</setting>
+      <setting key="2001">E:\RACING\d3-racing-legends2\Assets\3d_source</setting>
+      <setting key="2002"></setting>
+      <setting key="2008"></setting>
+      <setting key="2003">ShowMissingItems</setting>
+      <setting key="2011">{"EnableIndexedSearch":false,"SearchFields":["c7cb3aac","21c3aef2","10957a87","13643a0c"]}</setting>
+    </settings>
+  </workspace>
+</connecter>
