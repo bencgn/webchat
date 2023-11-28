@@ -39,7 +39,7 @@ io.on('connection', (socket) => {
 // Multer setup for file uploading
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'E:/webchat/file') // Upload directory
+        cb(null, '/webchat/file') // Upload directory
     },
     filename: function (req, file, cb) {
         cb(null, file.fieldname + '-' + Date.now())
