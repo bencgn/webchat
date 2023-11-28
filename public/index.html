@@ -10,7 +10,7 @@
     font-family: Arial, sans-serif;
   }
   #chat-container {
-    width: 90%;
+    width: 99%;
     max-width: 1000px;
     margin: 30px auto;
     box-shadow: 0 0 10px #ccc;
@@ -51,7 +51,13 @@
     background: #4cae4c;
   }
 
+  #upload-form {
+    width: 20%;
+  }
 
+  #upload-form button {
+    background-color: black;
+  }
   .avatar {
   width: 40px; /* Adjust the size as needed */
   height: 40px; /* Keep height and width the same for a perfect circle */
@@ -69,15 +75,17 @@
   </div>
 
   <div id="input-container">
-    <!-- Form for file upload -->
-    <form id="upload-form" enctype="multipart/form-data">
-        <input type="file" id="file-input" name="file">
-        <button type="button" onclick="uploadFile()">Update</button>
-    </form>
+   
 
     <!-- Existing chat input and send button -->
-    <input type="text" id="message-input" placeholder="Type a message...">
+    <input type="text" id="message-input" placeholder="Nhắn gì?...">
     <button onclick="sendMessage()">Send</button>
+
+     <!-- Form for file upload -->
+     <form id="upload-form" enctype="multipart/form-data">
+      <input type="file" id="file-input" name="file">
+      <button type="button" onclick="uploadFile()">UpFile</button>
+  </form>
 </div>
 </div>
 
